@@ -4,30 +4,33 @@
     // =========================
     // SISTEMA DE ATUALIZAÇÃO
     // =========================
+const APP_VERSION = "1.0.2";
 
-    const APP_VERSION = "1.0.2";
+async function checkUpdate() {
 
-    async function checkUpdate() {
-        try {
+    try {
 
-            const res = await fetch(
-                "https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now()
-            );
+        const res = await fetch(
+            "https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now()
+        );
 
-            const data = await res.json();
+        const data = await res.json();
 
-            if (data.version !== APP_VERSION) {
+        const lastAlert = localStorage.getItem("last_update_alert");
 
-                alert("Nova atualização disponível 🚀");
+        if (data.version !== APP_VERSION && lastAlert !== data.version) {
 
-               
-            }
+            localStorage.setItem("last_update_alert", data.version);
 
-        } catch (e) {
-            console.log("Erro atualização:", e);
+            alert("Nova atualização disponível 🚀");
         }
-    }
 
+    } catch (e) {
+
+        console.log("Erro atualização:", e);
+
+    }
+}
     // verifica atualização a cada 10 segundos
     setInterval(checkUpdate, 60000);
 
