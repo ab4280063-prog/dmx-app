@@ -1,4 +1,31 @@
 (function () {
+    const APP_VERSION = "1.0.0";
+
+    async function checkUpdate() {
+
+        try {
+
+            const res = await fetch(
+                "https:https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now()
+            );
+
+            const data = await res.json();
+
+            if (data.version !== APP_VERSION) {
+
+                alert("Nova atualização disponível 🚀");
+
+                location.reload();
+
+            }
+
+        } catch (e) {
+
+            console.log("Erro atualização:", e);
+
+        }
+
+    }
     // State Management
     let state = {
         address: 1,
@@ -1117,31 +1144,5 @@ ${materialData}
         if (!mainView) init();
         checkUpdate();
     });
-const APP_VERSION = "1.0.0";
 
-async function checkUpdate() {
-
-    try {
-
-        const res = await fetch(
-            "https://https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now()
-        );
-
-        const data = await res.json();
-
-        if (data.version !== APP_VERSION) {
-
-            alert("Nova atualização disponível 🚀");
-
-            location.reload();
-
-        }
-
-    } catch (e) {
-
-        console.log("Erro atualização:", e);
-
-    }
-
-}
 })();
