@@ -29,7 +29,7 @@
     }
 
     // verifica atualização a cada 10 segundos
-    setInterval(checkUpdate, 10000);
+    setInterval(checkUpdate, 60000);
 
     // =====================================
     // RESTANTE DO SEU CÓDIGO ABAIXO
