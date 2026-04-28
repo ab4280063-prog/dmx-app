@@ -1,4 +1,5 @@
-     (function () {
+
+(function () {
 
     // =========================
     // SISTEMA DE ATUALIZAÇÃO
@@ -10,7 +11,7 @@
         try {
 
             const res = await fetch(
-                "https://https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now()
+                "https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now()
             );
 
             const data = await res.json();
@@ -33,7 +34,7 @@
     // =====================================
     // RESTANTE DO SEU CÓDIGO ABAIXO
     // =====================================
-        
+
     // State Management
     let state = {
         address: 1,
@@ -1117,6 +1118,7 @@ ${materialData}
         init();
         checkUpdate();
 
+
         // Handle Android Back Button
         document.addEventListener('backbutton', (e) => {
             const openModal = document.querySelector('.modal-in');
@@ -1151,7 +1153,7 @@ ${materialData}
     // Fallback for browser testing if deviceready doesn't fire
     document.addEventListener('DOMContentLoaded', () => {
         if (!mainView) init();
-        
+
     });
 
 })();
