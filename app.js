@@ -1,12 +1,17 @@
 (function () {
+    (function () {
+
+    // =========================
+    // SISTEMA DE ATUALIZAÇÃO
+    // =========================
+
     const APP_VERSION = "1.0.0";
 
     async function checkUpdate() {
-
         try {
 
             const res = await fetch(
-                "https:https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now()
+                "https://https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now()
             );
 
             const data = await res.json();
@@ -15,17 +20,21 @@
 
                 alert("Nova atualização disponível 🚀");
 
-                location.reload();
-
+                window.location.reload(true);
             }
 
         } catch (e) {
-
             console.log("Erro atualização:", e);
-
         }
-
     }
+
+    // verifica atualização a cada 10 segundos
+    setInterval(checkUpdate, 10000);
+
+    // =====================================
+    // RESTANTE DO SEU CÓDIGO ABAIXO
+    // =====================================
+        
     // State Management
     let state = {
         address: 1,
