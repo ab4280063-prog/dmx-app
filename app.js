@@ -1124,7 +1124,7 @@ async function checkUpdate() {
     try {
 
         const res = await fetch(
-            "https://antoniobatista.github.io/dmx-app/version.json?t=" + Date.now()
+            "https://https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now()
         );
 
         const data = await res.json();
