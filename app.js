@@ -4,7 +4,7 @@
     // =========================
     // SISTEMA DE ATUALIZAÇÃO
     // =========================
-const APP_VERSION = "1.0.4";
+const APP_VERSION = "1.0.5";
 
 async function checkUpdate() {
 
