@@ -1117,25 +1117,31 @@ ${materialData}
     document.addEventListener('DOMContentLoaded', () => {
         if (!mainView) init();
     });
-    // 🔄 SISTEMA DE ATUALIZAÇÃO ONLINE
-    const APP_VERSION = "1.0.0"; // altere quando atualizar
+const APP_VERSION = "1.0.0";
 
-    async function checkUpdate() {
-        try {
-            const res = await fetch("https:https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now());
-            const data = await res.json();
+async function checkUpdate() {
 
-            if (data.version !== APP_VERSION) {
-                f7.dialog.confirm(
-                    `Nova versão disponível (${data.version}) 🚀\nDeseja atualizar?`,
-                    "Atualização",
-                    () => {
-                        location.reload();
-                    }
-                );
-            }
-        } catch (e) {
-            console.log("Erro ao verificar atualização:", e);
+    try {
+
+        const res = await fetch(
+            "https://antoniobatista.github.io/dmx-app/version.json?t=" + Date.now()
+        );
+
+        const data = await res.json();
+
+        if (data.version !== APP_VERSION) {
+
+            alert("Nova atualização disponível 🚀");
+
+            location.reload();
+
         }
+
+    } catch (e) {
+
+        console.log("Erro atualização:", e);
+
     }
+
+}
 })();
