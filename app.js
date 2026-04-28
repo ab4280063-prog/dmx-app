@@ -20,7 +20,7 @@
 
                 alert("Nova atualização disponível 🚀");
 
-                window.location.reload(true);
+               
             }
 
         } catch (e) {
