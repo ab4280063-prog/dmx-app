@@ -1080,7 +1080,6 @@ ${materialData}
     // Start App
     document.addEventListener('deviceready', () => {
         init();
-        checkUpdate();
 
         // Handle Android Back Button
         document.addEventListener('backbutton', (e) => {
@@ -1116,6 +1115,7 @@ ${materialData}
     // Fallback for browser testing if deviceready doesn't fire
     document.addEventListener('DOMContentLoaded', () => {
         if (!mainView) init();
+        checkUpdate();
     });
 const APP_VERSION = "1.0.0";
 
