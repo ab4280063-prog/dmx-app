@@ -1080,6 +1080,7 @@ ${materialData}
     // Start App
     document.addEventListener('deviceready', () => {
         init();
+        checkUpdate();
 
         // Handle Android Back Button
         document.addEventListener('backbutton', (e) => {
@@ -1121,7 +1122,7 @@ ${materialData}
 
     async function checkUpdate() {
         try {
-            const res = await fetch("https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now());
+            const res = await fetch("https:https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now());
             const data = await res.json();
 
             if (data.version !== APP_VERSION) {
@@ -1129,7 +1130,7 @@ ${materialData}
                     `Nova versão disponível (${data.version}) 🚀\nDeseja atualizar?`,
                     "Atualização",
                     () => {
-                        window.location.reload(true);
+                        location.reload();
                     }
                 );
             }
