@@ -1121,7 +1121,7 @@ ${materialData}
 
     async function checkUpdate() {
         try {
-            const res = await fetch("https://SEU_USUARIO.github.io/SEU_REPO/version.json?t=" + Date.now());
+            const res = await fetch("https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now());
             const data = await res.json();
 
             if (data.version !== APP_VERSION) {
