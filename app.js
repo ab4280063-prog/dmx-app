@@ -1,5 +1,4 @@
-(function () {
-    (function () {
+     (function () {
 
     // =========================
     // SISTEMA DE ATUALIZAÇÃO
