@@ -1,3 +1,6 @@
 {
   "version": "1.0.6"
+  
+  "apk": "https://SEU_LINK/app-release.apk",
+  "force": false
 }
