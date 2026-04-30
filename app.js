@@ -1,3 +1,10 @@
+// Framework7 Initialization
+const f7 = new Framework7({
+    el: '#app',
+    name: 'DMX MASTER PRO',
+    theme: 'auto',
+    darkMode: true,
+});
 
 (function () {
 
@@ -95,13 +102,6 @@
         paramsFixtureChannels: 0
     };
 
-    // Framework7 Initialization
-    const f7 = new Framework7({
-        el: '#app',
-        name: 'DMX MASTER PRO',
-        theme: 'auto',
-        darkMode: true,
-    });
 
     let mainView;
 
@@ -135,19 +135,27 @@
     // Initialize
     function init() {
         mainView = f7.views.create('.view-main');
+
         const saved = localStorage.getItem('dmx_master_pro_state');
 
         if (saved) {
             try {
                 const parsed = JSON.parse(saved);
                 state = { ...state, ...parsed };
-            } catch (e) {
-                console.warn("Erro ao carregar estado:", e);
-            }
+            } catch (e) { }
         }
+
         state.currentView = 'dashboard';
         render();
-        checkUpdate();
+
+        setTimeout(() => {
+            checkUpdate(); // 🔥 garante carregamento completo
+        }, 500);
+
+        if (!f7 || !f7.dialog) {
+            console.log("Framework7 ainda não inicializado");
+            return;
+        }
     }
 
     function saveState() {
