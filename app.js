@@ -4,40 +4,34 @@
     // =========================
     // SISTEMA DE ATUALIZAÇÃO
     // =========================
-const APP_VERSION = "1.0.5";
 
-async function checkUpdate() {
+    const APP_VERSION = "1.0.6";
 
-    try {
+    async function checkUpdate() {
 
-        const res = await fetch(
-            "https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now()
-        );
+        try {
 
-        const data = await res.json();
+            const res = await fetch(
+                "https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now()
+            );
 
-        const lastAlert = localStorage.getItem("last_update_alert");
+            const data = await res.json();
 
-        if (data.version !== APP_VERSION && lastAlert !== data.version) {
+            const lastAlert = localStorage.getItem("last_update_alert");
 
-            localStorage.setItem("last_update_alert", data.version);
+            if (data.version !== APP_VERSION && lastAlert !== data.version) {
 
-            alert("Nova atualização disponível 🚀");
+                localStorage.setItem("last_update_alert", data.version);
+
+                alert("Nova atualização disponível 🚀");
+            }
+
+        } catch (e) {
+
+            console.log("Erro atualização:", e);
+
         }
-
-    } catch (e) {
-
-        console.log("Erro atualização:", e);
-
     }
-}
-    // verifica atualização a cada 10 segundos
-    setInterval(checkUpdate, 60000);
-
-    // =====================================
-    // RESTANTE DO SEU CÓDIGO ABAIXO
-    // =====================================
-
     // State Management
     let state = {
         address: 1,
