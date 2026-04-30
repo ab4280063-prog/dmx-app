@@ -12,7 +12,7 @@ const f7 = new Framework7({
     // SISTEMA DE ATUALIZAÇÃO
     // =========================
 
-    const APP_VERSION = "1.0.10";
+    const APP_VERSION = "1.0.11";
     async function checkUpdate() {
         try {
             const res = await fetch(
