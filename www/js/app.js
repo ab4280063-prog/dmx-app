@@ -1,18 +1,14 @@
-// Framework7 Initialization
-const f7 = new Framework7({
-    el: '#app',
-    name: 'DMX MASTER PRO',
-    theme: 'auto',
-    darkMode: true,
-});
+document.addEventListener("DOMContentLoaded", function () {
 
-(function () {
+    const APP_VERSION = "1.0.10";
 
-    // =========================
-    // SISTEMA DE ATUALIZAÇÃO
-    // =========================
+    const f7 = new Framework7({
+        el: '#app',
+        name: 'DMX MASTER PRO',
+        theme: 'auto',
+        darkMode: true,
+    });
 
-    const APP_VERSION = "1.0.11";
     async function checkUpdate() {
         try {
             const res = await fetch(
@@ -20,37 +16,62 @@ const f7 = new Framework7({
             );
 
             const data = await res.json();
-            const lastAlert = localStorage.getItem("last_update_alert");
 
-            if (data.version !== APP_VERSION && lastAlert !== data.version) {
+            const serverVersion = data.version;
 
-                localStorage.setItem("last_update_alert", data.version);
+            if (isNewVersion(serverVersion, APP_VERSION)) {
 
-                f7.dialog.confirm(
-                    `Nova versão (${data.version}) disponível 🚀\nDeseja atualizar agora?`,
-                    "Atualização",
-                    () => {
-                        downloadAndInstall(data.apk);
-                    }
-                );
+                if (data.force) {
+                    forceUpdate(data.apk, serverVersion);
+                } else {
+                    f7.dialog.confirm(
+                        `Nova versão ${serverVersion} disponível.\nAtualizar agora?`,
+                        "Atualização",
+                        () => downloadAndInstall(data.apk)
+                    );
+                }
             }
 
         } catch (e) {
-            console.log("Erro atualização:", e);
+            console.log("Erro update:", e);
         }
+    }
+
+    function isNewVersion(server, local) {
+        const s = server.split(".").map(Number);
+        const l = local.split(".").map(Number);
+
+        for (let i = 0; i < s.length; i++) {
+            if (s[i] > (l[i] || 0)) return true;
+            if (s[i] < (l[i] || 0)) return false;
+        }
+        return false;
+    }
+
+    function forceUpdate(apkUrl, version) {
+        f7.dialog.alert(
+            "Atualização obrigatória disponível. O app será atualizado.",
+            "Atualização",
+            () => downloadAndInstall(apkUrl)
+        );
     }
 
     function downloadAndInstall(url) {
 
+        if (!window.cordova) {
+            window.open(url, "_blank");
+            return;
+        }
+
         const fileTransfer = new FileTransfer();
         const fileURL = cordova.file.externalDataDirectory + "update.apk";
 
-        let progressDialog = f7.dialog.progress("Baixando atualização...", 0);
+        let dialog = f7.dialog.progress("Baixando atualização...", 0);
 
-        fileTransfer.onprogress = function (progressEvent) {
-            if (progressEvent.lengthComputable) {
-                let percent = Math.floor((progressEvent.loaded / progressEvent.total) * 100);
-                progressDialog.setProgress(percent);
+        fileTransfer.onprogress = function (e) {
+            if (e.lengthComputable) {
+                let percent = Math.floor((e.loaded / e.total) * 100);
+                dialog.setProgress(percent);
             }
         };
 
@@ -59,30 +80,33 @@ const f7 = new Framework7({
             fileURL,
             function (entry) {
 
-                progressDialog.close();
+                dialog.close();
 
-                f7.dialog.confirm(
-                    "Download concluído. Instalar agora?",
-                    "Instalação",
-                    () => {
-                        cordova.plugins.fileOpener2.open(
-                            entry.toURL(),
-                            "application/vnd.android.package-archive",
-                            {
-                                error: (e) => alert("Erro ao abrir APK: " + JSON.stringify(e)),
-                                success: () => console.log("Instalador aberto")
-                            }
-                        );
+                cordova.plugins.fileOpener2.open(
+                    entry.toURL(),
+                    "application/vnd.android.package-archive",
+                    {
+                        error: function (e) {
+                            f7.dialog.alert("Erro ao abrir APK");
+                        },
+                        success: function () {
+                            console.log("Instalador aberto");
+                        }
                     }
                 );
-
             },
-            function (error) {
-                progressDialog.close();
-                alert("Erro no download: " + JSON.stringify(error));
+            function (err) {
+                dialog.close();
+                f7.dialog.alert("Erro no download da atualização");
+                console.log(err);
             }
         );
     }
+
+    // roda ao abrir app
+    checkUpdate();
+
+
 
     // State Management
     let state = {
