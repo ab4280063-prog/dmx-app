@@ -5,7 +5,7 @@
     // SISTEMA DE ATUALIZAÇÃO
     // =========================
 
-    const APP_VERSION = "1.0.9";
+    const APP_VERSION = "1.0.8";
     async function checkUpdate() {
         try {
             const res = await fetch(
