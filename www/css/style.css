@@ -1,0 +1,269 @@
+/* Custom CSS for DMX MASTER PRO */
+
+:root {
+  --color-primary: #007aff;
+  --color-primary-low: rgba(0, 122, 255, 0.1);
+  --color-bg-input: #1c1c1e;
+  --color-text-secondary: #8e8e93;
+  --f7-theme-color: #007aff;
+  --f7-page-bg-color: #000a1a;
+  --f7-bars-bg-color: #001529;
+  --f7-bars-text-color: #ffffff;
+  --f7-list-bg-color: #001529;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  background-color: #042543 !important;
+  color: rgb(254, 254, 254);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  width: 100%;
+
+}
+
+body {
+  font-family: -apple-system, SF Pro Display, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+#app,
+.view,
+.page,
+.page-content {
+  margin: 0% !important;
+  padding: 0% !important;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0rem;
+  padding-bottom: 4%;
+  background-color: #042543;
+  border-bottom-width: 1px;
+  border-color: rgba(255, 255, 255, 0.05);
+  position: sticky;
+  top: 0%;
+  z-index: 50;
+  padding-top: calc(px + env(safe-area-inset-top));
+}
+
+.logo-container {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: rgba(242, 243, 244, 0.998);
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  margin-top: 8%;
+}
+
+.app-title {
+  font-size: 1.150em;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  color: rgb(2, 0, 10);
+  margin: 0;
+  margin-top: 10%;
+}
+
+.app-subtitle {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #fefefe;
+  letter-spacing: 0.1em;
+}
+
+.btn-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(247, 245, 245);
+  transition-property: all;
+  transition-duration: 150ms;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-icon:active {
+  transform: scale(0.95);
+}
+
+.card {
+  background-color: #0707088c;
+  border-radius: 1.7rem;
+  border-width: 2px;
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 25px 50px -12px rgba(4, 4, 4, 0.5);
+  margin-bottom: 5rem;
+  padding: 20px 20px;
+}
+
+.label {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #77778d;
+  margin-bottom: 0.5rem;
+  display: block;
+  letter-spacing: 0.05em;
+  padding-left: 10px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #073460;
+  border-radius: 1.3rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+  border-width: 3px;
+  border-color: rgba(253, 252, 252, 0.235);
+  transition-property: all;
+  transition-duration: 150ms;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.input-wrapper:focus-within {
+  border-color: rgba(0, 123, 255, 0.5);
+}
+
+.input-field {
+  background-color: transparent;
+  border-style: none;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 1.1rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition-property: all;
+  transition-duration: 150ms;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: none;
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btn-primary {
+  background-color: #007aff;
+  color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 122, 255, 0.2), 0 4px 6px -2px rgba(0, 122, 255, 0.2);
+}
+
+.btn-secondary {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgba(240, 4, 4, 0.765);
+  border-width: 1px;
+  border-color: rgba(241, 236, 236, 0.1);
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #042543;
+  border-top-width: 1px;
+  border-color: rgba(255, 255, 255, 0.05);
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 1rem;
+  padding-bottom: 0rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding-bottom: calc(-5px +env(safe-area-inset-bottom));
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: -3rem;
+  color: #d0d0db;
+  transition-property: all;
+  transition-duration: 150ms;
+  text-decoration: none;
+}
+
+.nav-item.active {
+  color: #011020;
+}
+
+.nav-item span {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.param-input {
+  flex: 1 1 0%;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Framework7 Overrides */
+.page-content {
+  padding-top: 0 !important;
+}
+
+.list,
+.block {
+  margin: 0 !important;
+  padding: 0 !important;
+}
