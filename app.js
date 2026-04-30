@@ -6,32 +6,77 @@
     // =========================
 
     const APP_VERSION = "1.0.6";
-
     async function checkUpdate() {
-
         try {
-
             const res = await fetch(
                 "https://ab4280063-prog.github.io/dmx-app/version.json?t=" + Date.now()
             );
 
             const data = await res.json();
-
             const lastAlert = localStorage.getItem("last_update_alert");
 
             if (data.version !== APP_VERSION && lastAlert !== data.version) {
 
                 localStorage.setItem("last_update_alert", data.version);
 
-                alert("Nova atualização disponível 🚀");
+                f7.dialog.confirm(
+                    `Nova versão (${data.version}) disponível 🚀\nDeseja atualizar agora?`,
+                    "Atualização",
+                    () => {
+                        downloadAndInstall(data.apk);
+                    }
+                );
             }
 
         } catch (e) {
-
             console.log("Erro atualização:", e);
-
         }
     }
+
+    function downloadAndInstall(url) {
+
+        const fileTransfer = new FileTransfer();
+        const fileURL = cordova.file.externalDataDirectory + "update.apk";
+
+        let progressDialog = f7.dialog.progress("Baixando atualização...", 0);
+
+        fileTransfer.onprogress = function (progressEvent) {
+            if (progressEvent.lengthComputable) {
+                let percent = Math.floor((progressEvent.loaded / progressEvent.total) * 100);
+                progressDialog.setProgress(percent);
+            }
+        };
+
+        fileTransfer.download(
+            url,
+            fileURL,
+            function (entry) {
+
+                progressDialog.close();
+
+                f7.dialog.confirm(
+                    "Download concluído. Instalar agora?",
+                    "Instalação",
+                    () => {
+                        cordova.plugins.fileOpener2.open(
+                            entry.toURL(),
+                            "application/vnd.android.package-archive",
+                            {
+                                error: (e) => alert("Erro ao abrir APK: " + JSON.stringify(e)),
+                                success: () => console.log("Instalador aberto")
+                            }
+                        );
+                    }
+                );
+
+            },
+            function (error) {
+                progressDialog.close();
+                alert("Erro no download: " + JSON.stringify(error));
+            }
+        );
+    }
+
     // State Management
     let state = {
         address: 1,
